@@ -14,14 +14,22 @@ header {
     height: 90px;
 }
 
-h1 {
-    color: #901C1C;
-    margin-right: 100px;
+header a {
+    margin-left: 100px;
 }
 
-.logo {
+h1 {
+    color: #901C1C;
+    margin-right: 110px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#logo {
     height: 50px;
-    margin-left: 100px;
 }
 
 .photographer_section {
@@ -31,7 +39,7 @@ h1 {
     margin-top: 100px;
 }
 
-.photographer_section article {
+.photographer_section div {
     justify-self: center;
     display: flex;
     justify-content: center;
@@ -39,12 +47,39 @@ h1 {
     flex-direction: column;
 }
 
-.photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
+.photographer_section section {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.photographer_section article img {
+.photographer-article__name {
+    color: #D3573C;
+    font-size: 36px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.photographer-article__img {
     height: 200px;
     width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.photographer-article__location {
+    margin: 0;
+    color: #901C1C;
+    font-size: 95%;
+}
+
+.photographer-article__tagline {
+    font-size: 75%;
+}
+
+.photographer-article__price {
+    font-size: 75%;
+    color: #525252;
 }
