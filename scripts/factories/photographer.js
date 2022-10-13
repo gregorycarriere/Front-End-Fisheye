@@ -8,7 +8,7 @@ function photographerFactory(data) {
         const article = document.createElement( 'article' );
         article.classList.add('photographer-article');
 
-        const url = `./profile.html?id=${id}`;
+        const url = `./photographer.html?id=${id}`;
         const link = document.createElement( 'a' );
         link.setAttribute("href", url);
 
@@ -17,9 +17,11 @@ function photographerFactory(data) {
         const img = document.createElement( 'img' );
         img.classList.add('photographer-article__img');
         img.setAttribute("src", picture)
+        img.setAttribute("alt", 'photo de '+ name);
 
         const h2 = document.createElement( 'h2' );
         h2.classList.add('photographer-article__name');
+        h2.setAttribute("aria-label", name);
         h2.textContent = name;
 
         const infoSection = document.createElement( 'section');
@@ -48,8 +50,105 @@ function photographerFactory(data) {
         link.appendChild(infoSection);
 
         article.appendChild(link);
-        
         return (article);
     }
-    return { name, picture, getUserCardDOM }
+
+    function getUserProfileDOM() {
+        const profile = document.querySelector(".photograph-header");
+
+        const img = document.createElement( 'img' );
+        img.classList.add('photographer-header__img');
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", 'photo de '+ name);
+
+        const detailDiv = document.createElement( 'div' );
+        detailDiv.classList.add('photographer-header__detail');
+
+        const profile_name = document.createElement( 'h1' );
+        profile_name.classList.add('photographer-header__name');
+        profile_name.setAttribute("aria-label", name);
+        profile_name.textContent = name;
+
+        const info = document.createElement( 'p' );
+        info.setAttribute("class",'photographer-header__info');
+
+        const location = document.createElement( 'span' );
+        location.classList.add('photographer-header__location');
+        location.textContent = city + ', ' + country;
+
+        const taglineSpan = document.createElement( 'span' );
+        taglineSpan.classList.add('photographer-header__tagline');
+        taglineSpan.textContent = tagline;
+
+        info.appendChild(location);
+        info.appendChild(taglineSpan);
+
+        detailDiv.appendChild(profile_name);
+        detailDiv.appendChild(info);
+
+        profile.insertAdjacentElement('afterbegin', detailDiv);
+        profile.insertAdjacentElement('beforeend', img);
+    }
+
+
+    return { name, picture, getUserCardDOM, getUserProfileDOM}
+}
+
+
+
+function mediaFactory(data) {
+    const {id,photographerId,title,image,video,likes,date,price} = data;
+
+    const media_picture = `assets/images/${image}`;
+    const media_video = `assets/images/${video}`;
+
+    function getMediaCardDOM(){
+        const mediaLink = document.createElement( 'article' );
+        mediaLink.classList.add('mediaLink');
+
+        const detailMedia = document.createElement( 'div' );
+        detailMedia.classList.add('media-detail');
+
+        const mediaTitle = document.createElement( 'span' );
+        mediaTitle.classList.add('media-title');
+        mediaTitle.textContent = title;
+
+        const likeDetail = document.createElement( 'div' );
+
+        var nbLike = document.createElement( 'span' );
+        nbLike.classList.add('media-likes');
+        nbLike.textContent = likes;
+        const iconLike = document.createElement( 'i' );
+        iconLike.classList.add('fa-solid', 'fa-heart', 'like-icon');
+
+
+        likeDetail.appendChild(nbLike);
+        likeDetail.appendChild(iconLike);
+
+        detailMedia.appendChild(mediaTitle);
+        detailMedia.appendChild(likeDetail);
+
+        if (video === undefined){
+            const img = document.createElement( 'img' );
+            img.classList.add('media-img');
+            img.setAttribute("src", media_picture)
+            img.setAttribute("alt", title);
+
+            mediaLink.appendChild(img);
+        }
+        else {
+            const vid = document.createElement( 'video' );
+            vid.classList.add('media-video');
+            vid.setAttribute("src", media_video)
+            vid.setAttribute("alt", title);
+
+            mediaLink.appendChild(vid);
+        }
+
+        mediaLink.appendChild(detailMedia);
+
+        return (mediaLink);
+    }
+
+    return { getMediaCardDOM };
 }
