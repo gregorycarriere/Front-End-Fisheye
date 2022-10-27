@@ -5,6 +5,17 @@ const idPhotographer = params.get('id');
 
 let mediaBox = [];
 
+var btnTriDate = document.getElementById('date');
+var btnTriPop = document.getElementById('pop');
+var btnTriTitle = document.getElementById('title');
+
+let numberLikes = 0;
+var likes = [];
+let n = 0;
+
+var allMediasLikes = document.querySelector(".aside-like-count");
+
+
 
 const getPhotographersData = async() => {
     return await fetch('data/photographers.json')
@@ -19,7 +30,6 @@ async function displayProfile(photographer){
     const photographerModel = photographerFactory(photographer);
     photographerModel.getUserProfileDOM();
 };
-
 
 function triPopularity(medias){
     medias.sort(function (a, b) {
@@ -59,6 +69,41 @@ function displayMedias(medias){
 }
 
 
+function getNumberLikes(medias){
+    numberLikes = 0;
+    medias.forEach((media) => {
+        numberLikes += media.likes;
+    });
+
+    allMediasLikes.textContent = numberLikes;
+}
+
+
+function getMediaClick(Btn){
+    const likedMedia = mediaBox.find(media => media.id == Btn.id);
+    
+    const isLiked = Btn.parentNode.getAttribute('isLiked');
+    const btnLike =  Btn.parentNode;
+    const divLike = btnLike.parentNode;
+    const spanLike = divLike.firstChild;
+
+
+    if( isLiked == 'false'){
+        btnLike.setAttribute('isLiked', 'true');
+        likedMedia.likes += 1;
+        getNumberLikes(mediaBox);
+        spanLike.innerText = parseInt(spanLike.textContent) + 1;
+    }else{
+        btnLike.setAttribute('isLiked', 'false');
+        likedMedia.likes -= 1;
+        getNumberLikes(mediaBox);
+        spanLike.innerText = parseInt(spanLike.textContent) - 1;
+    }
+
+}
+
+
+
 async function init() {
 
     const jsonData = await getPhotographersData();
@@ -68,10 +113,26 @@ async function init() {
     const medias = jsonData.media;
     
     getProfileMedias(medias);
+    getNumberLikes(mediaBox);
+
     triPopularity(mediaBox);
-    // triTitle(mediaBox);
-    // triDate(mediaBox);
     displayMedias(mediaBox);
+
+    btnTriDate.addEventListener("click", function(){
+        triDate(mediaBox);
+        displayMedias(mediaBox);
+    });
+
+    btnTriPop.addEventListener("click", function(){
+        triPopularity(mediaBox);
+        displayMedias(mediaBox);
+    });
+
+    btnTriTitle.addEventListener("click", function(){
+        triTitle(mediaBox);
+        displayMedias(mediaBox);
+    });
+    
 
     const photographerPrice = document.querySelector(".aside-price");
     const priceDay = profileData.price;
@@ -83,9 +144,21 @@ async function init() {
     
     photographerPrice.textContent = priceDay;
 
-
     displayProfile(profileData);
     
+    const btnLikes = document.querySelectorAll(".like-icon");
+    btnLikes.forEach((btnLike) => {
+        btnLike.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            
+            getMediaClick(btnLike);
+            
+        });
+    });
+
+    
+
 };
 
 init();

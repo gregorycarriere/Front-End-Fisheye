@@ -21,6 +21,7 @@ header a {
 h1 {
     color: #901C1C;
     margin-right: 110px;
+    font-size: 36px;
 }
 
 a {
@@ -72,14 +73,14 @@ a {
 .photographer-article__location {
     margin: 0;
     color: #901C1C;
-    font-size: 95%;
+    font-size: 13px;
 }
 
 .photographer-article__tagline {
-    font-size: 75%;
+    font-size: 12px;
 }
 
 .photographer-article__price {
-    font-size: 75%;
+    font-size: 10px;
     color: #525252;
 }

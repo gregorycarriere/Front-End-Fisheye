@@ -114,16 +114,25 @@ function mediaFactory(data) {
         mediaTitle.textContent = title;
 
         const likeDetail = document.createElement( 'div' );
+        likeDetail.classList.add('like-details');
 
         var nbLike = document.createElement( 'span' );
         nbLike.classList.add('media-likes');
         nbLike.textContent = likes;
+
+        const btnLike = document.createElement( 'button' );
+        btnLike.classList.add('like-button');
+        btnLike.setAttribute("isLiked", 'false');
+        
+
         const iconLike = document.createElement( 'i' );
         iconLike.classList.add('fa-solid', 'fa-heart', 'like-icon');
+        iconLike.setAttribute("id", id);
 
+        btnLike.appendChild(iconLike)
 
         likeDetail.appendChild(nbLike);
-        likeDetail.appendChild(iconLike);
+        likeDetail.appendChild(btnLike);
 
         detailMedia.appendChild(mediaTitle);
         detailMedia.appendChild(likeDetail);
