@@ -1,9 +1,8 @@
 
 const modalBtn = document.querySelector(".contact_button");
-modalBtn.addEventListener("click", displayModal);
 
 const closeBtn = document.querySelector(".close-contact");
-closeBtn.addEventListener("click", closeModal);
+
 
 const modal = document.getElementById("contact_modal");
 const content = document.querySelector(".content");
@@ -11,7 +10,10 @@ const body = document.querySelector("#body");
 
 const formData = document.querySelectorAll(".formData");
 
-var firstFocus = document.querySelector(".close-btn");
+const firstFocus = document.querySelector(".close-btn");
+
+const sendBtn = document.getElementById("send");
+const contactForm = document.getElementById("contact-form");
 
 let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 let nameRegex = /^[A-Za-zéèïùçü\- ]{2,255}$/;
@@ -26,9 +28,8 @@ function displayModal() {
   content.setAttribute("aria-hidden", 'true');
   modal.setAttribute("aria-hidden", 'false');
   body.classList.add("no-scroll");
-  setTimeout(() => {
-    firstFocus.focus();
-  }, 500); 
+  firstFocus.focus();
+  keyControls();
 }
 
 function closeModal() {
@@ -39,50 +40,52 @@ function closeModal() {
   modalBtn.focus();
 }
 
-window.addEventListener("keydown", (event) => {
-    if (event.defaultPrevented) {
-      return; // Do nothing if the event was already processed
-    }
+function keyControls(){
+    modal.addEventListener("keydown", (event) => {
+      if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+      }
+    
+      switch (event.key) {
+        case "Down": // IE/Edge specific value
+        case "ArrowDown":
+          // Do something for "down arrow" key press.
+          break;
+        case "Up": // IE/Edge specific value
+        case "ArrowUp":
+          // Do something for "up arrow" key press.
+          break;
+        case "Left": // IE/Edge specific value
+        case "ArrowLeft":
+          // Do something for "left arrow" key press.
+          break;
+        case "Right": // IE/Edge specific value
+        case "ArrowRight":
+          // Do something for "right arrow" key press.
+          break;
+        case "Enter":
+          // Do something for "enter" or "return" key press.
+          break;
+        case "Esc": // IE/Edge specific value
+        case "Escape":
+          // Do something for "esc" key press.
+          closeModal();
+          break;
+        default:
+          return; // Quit when this doesn't handle the key event.
+      }
+    
+      // Cancel the default action to avoid it being handled twice
+      event.preventDefault();
+  }, true);
+}
   
-    switch (event.key) {
-      case "Down": // IE/Edge specific value
-      case "ArrowDown":
-        // Do something for "down arrow" key press.
-        break;
-      case "Up": // IE/Edge specific value
-      case "ArrowUp":
-        // Do something for "up arrow" key press.
-        break;
-      case "Left": // IE/Edge specific value
-      case "ArrowLeft":
-        // Do something for "left arrow" key press.
-        break;
-      case "Right": // IE/Edge specific value
-      case "ArrowRight":
-        // Do something for "right arrow" key press.
-        break;
-      case "Enter":
-        // Do something for "enter" or "return" key press.
-        break;
-      case "Esc": // IE/Edge specific value
-      case "Escape":
-        // Do something for "esc" key press.
-        closeModal();
-        break;
-      default:
-        return; // Quit when this doesn't handle the key event.
-    }
-  
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
-}, true);
-  
+modalBtn.addEventListener("click", displayModal);
 
-const sendBtn = document.getElementById("send");
+closeBtn.addEventListener("click", closeModal);
 
 sendBtn.addEventListener("click", submitContactForm);
 
-const contactForm = document.getElementById("contact-form");
 
 function submitContactForm() {
 

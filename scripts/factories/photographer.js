@@ -129,7 +129,7 @@ function mediaFactory(data) {
         iconLike.classList.add('fa-solid', 'fa-heart', 'like-icon');
         iconLike.setAttribute("id", id);
 
-        btnLike.appendChild(iconLike)
+        btnLike.appendChild(iconLike);
 
         likeDetail.appendChild(nbLike);
         likeDetail.appendChild(btnLike);
@@ -139,17 +139,19 @@ function mediaFactory(data) {
 
         if (video === undefined){
             const img = document.createElement( 'img' );
-            img.classList.add('media-img');
-            img.setAttribute("src", media_picture)
+            img.classList.add('media-content');
+            img.setAttribute("src", media_picture);
             img.setAttribute("alt", title);
+            img.setAttribute("tabindex", 0);
 
             mediaLink.appendChild(img);
         }
         else {
             const vid = document.createElement( 'video' );
-            vid.classList.add('media-video');
-            vid.setAttribute("src", media_video)
+            vid.classList.add('media-content');
+            vid.setAttribute("src", media_video);
             vid.setAttribute("alt", title);
+            vid.setAttribute("tabindex", 0);
 
             mediaLink.appendChild(vid);
         }

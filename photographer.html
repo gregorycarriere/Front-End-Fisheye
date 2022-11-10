@@ -2,6 +2,7 @@
 <html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/lightbox.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@
           <div class="select" tabindex="0">
             <input class="selectopt" name="tri" type="radio" id="tri-pop" checked>
             <label for="tri-pop" class="option" id="pop">Popularité</label>
-            <input class="selectopt" name="tri" type="radio" id="tri-date">
+            <input class="selectopt" name="tri" type="radio" id="tri-date" >
             <label for="tri-date" class="option" id="date">Date</label>
             <input class="selectopt" name="tri" type="radio" id="tri-title">
             <label for="tri-title" class="option" id="title">Titre</label>
@@ -42,6 +43,17 @@
           <span class="aside-price"></span>€ / jour
         </p>
       </aside>
+    </div>
+    <div class="lightbox" role="dialog" aria-hidden="true">
+      <button class="lightbox__close">
+        <img src="assets/icons/close-red.svg" />
+      </button>
+      <div class="lightbox__modal">
+        <button class="lightbox__prev"></button>
+        <div class="lightbox__container">
+        </div>
+        <button class="lightbox__next"></button>
+      </div>
     </div>
     <div id="contact_modal" role="dialog" aria-hidden="true" aria-describedby="modalTitle">
 			<div class="modal">

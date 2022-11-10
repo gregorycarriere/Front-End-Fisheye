@@ -1,0 +1,76 @@
+.lightbox {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    z-index: 10;
+    overflow: auto;
+}
+
+.lightbox * {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.lightbox__modal {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 100%;
+    margin: 3% 5% 0 5%;
+    justify-content: center;
+}
+
+.lightbox__next,
+.lightbox__prev {
+    border: none;
+    background: url(/Front-End-Fisheye/assets/icons/arrow.svg) center center / 30px 48px no-repeat;
+    width: 125px;
+    height: 90%;
+    z-index: 11;
+    position: absolute;
+}
+
+.lightbox__next {
+    transform: rotate(180deg);
+    right: 6%;
+}
+
+.lightbox__prev {
+    left: 6%;
+}
+
+.lightbox__close{
+    border: none;
+    background-color: inherit;
+    position: absolute;
+    top: 5%;    
+    right: 8%;
+    z-index: 12;
+}
+
+.lightbox button {
+    cursor: pointer;
+}
+
+.lightbox__container {
+    width: fit-content;
+    height: fit-content;
+    
+}
+
+.lightbox__media {
+    width: 875px;
+    height: 51.7rem;
+    object-fit: cover;
+}
+
+.lightbox__title {
+    padding: .25% 0;
+    color: #901C1C;
+}

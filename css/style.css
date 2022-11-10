@@ -68,6 +68,10 @@ a {
     width: 200px;
     border-radius: 50%;
     object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.photographer-article__img:hover {
+    transform: scale(1.1);
 }
 
 .photographer-article__location {
