@@ -5,9 +5,7 @@ const idPhotographer = params.get('id');
 
 let mediaBox = [];
 
-var btnTriDate = document.getElementById('date');
-var btnTriPop = document.getElementById('pop');
-var btnTriTitle = document.getElementById('title');
+const selectTri = document.getElementById('tri-dropdown');
 
 let numberLikes = 0;
 
@@ -40,21 +38,21 @@ async function displayProfile(photographer){
 };
 
 function triPopularity(medias){
-    medias.sort(function (a, b) {
-        return a.likes < b.likes;
-      });
+    medias.sort(function (a,b) {
+        return b.likes - a.likes;
+    });
 }
 
 function triTitle(medias){
     medias.sort(function (a, b) {
-        return a.title > b.title;
-      });
+        return a.title.localeCompare(b.title);
+    });
 }
 
 function triDate(medias){
-    medias.sort(function (a, b) {
-        return a.date > b.date;
-      });
+    medias.sort(function (a,b) {
+        return a.date.localeCompare(b.date);
+    });
 }
 
 function getProfileMedias(medias){
@@ -125,16 +123,20 @@ function checkLikes(){
             
         });
 
-        btnLike.addEventListener("keydown", function(e){
-            if(e.key === "Enter"){
-                e.preventDefault();
-                e.stopPropagation();
-                
-                getLikeClick(btnLike);
+    
+    });
+
+    const btnBoxLikes = document.querySelectorAll(".like-button");
+    btnBoxLikes.forEach((btnBoxLike) => {
+        btnBoxLike.addEventListener("keydown", (event) => {
+            if (event.defaultPrevented) {
+                return; // Do nothing if the event was already processed
+            }
+            if(event.key === "Enter"){
+                getLikeClick(btnBoxLike.firstChild);
             }
         });
     });
-
 }
 
 function setMediaLightbox(index){
@@ -210,7 +212,6 @@ function displayLightbox(link){
     keyControls();
     
     function keyControls(){
-        console.log("test");
         lightbox.addEventListener("keydown", (event) => {
           if (event.defaultPrevented) {
             return; // Do nothing if the event was already processed
@@ -292,26 +293,29 @@ function InitListener(mediaBox){
     getClickMedia();
 }
 
-btnTriDate.addEventListener("click", function(){
-    triDate(mediaBox);
-    InitListener(mediaBox);
-});
+selectTri.addEventListener("change", function(event){
+    console.log(event.target[event.target.selectedIndex].text );
+    switch(event.target[event.target.selectedIndex].text){
+        case "Date":
+            triDate(mediaBox);
+            InitListener(mediaBox);
+            break;
+        case "Popularité":
+            triPopularity(mediaBox);
+            InitListener(mediaBox);
+            break;
+        case "Titre":
+            triTitle(mediaBox);
+            InitListener(mediaBox);
+            break;
+    }
+})
 
-btnTriPop.addEventListener("click", function(){
-    triPopularity(mediaBox);
-    InitListener(mediaBox);
-});
-
-btnTriTitle.addEventListener("click", function(){
-    triTitle(mediaBox);
-    InitListener(mediaBox);
-});
 
 closeBtnLightbox.addEventListener("click", function(){
     closeLightbox();
     InitListener(mediaBox);
 });
-
 
 
 nextBtnLightbox.addEventListener("click", nextMedia);

@@ -20,16 +20,14 @@
         <div class="photograph-header">
           <button class="contact_button">Contactez-moi</button>
         </div>
+
         <div class="media-tri">
-          <label for="tri">Trier par</label>
-          <div class="select" tabindex="0">
-            <input class="selectopt" name="tri" type="radio" id="tri-pop" checked>
-            <label for="tri-pop" class="option" id="pop">Popularité</label>
-            <input class="selectopt" name="tri" type="radio" id="tri-date" >
-            <label for="tri-date" class="option" id="date">Date</label>
-            <input class="selectopt" name="tri" type="radio" id="tri-title">
-            <label for="tri-title" class="option" id="title">Titre</label>
-          </div>
+          <label for="tri-dropdown">Trier par</label>
+          <select class="dropdown" id="tri-dropdown" aria-haspopup="true">
+              <option id="sort-pop" checked="checked">Popularité</option>
+              <option id="sort-date">Date</option>
+              <option id="sort-title">Titre</option>
+          </select>
 
         </div>
         <section class="media_section"></section>
