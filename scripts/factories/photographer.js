@@ -128,6 +128,7 @@ function mediaFactory(data) {
         const iconLike = document.createElement( 'i' );
         iconLike.classList.add('fa-solid', 'fa-heart', 'like-icon');
         iconLike.setAttribute("id", id);
+        iconLike.setAttribute("alt", "like icon");
 
         btnLike.appendChild(iconLike);
 

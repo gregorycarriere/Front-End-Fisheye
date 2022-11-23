@@ -44,7 +44,7 @@
     </div>
     <div class="lightbox" role="dialog" aria-hidden="true">
       <button class="lightbox__close">
-        <img src="assets/icons/close-red.svg" />
+        <img src="assets/icons/close-red.svg" alt="close button"/>
       </button>
       <div class="lightbox__modal">
         <button class="lightbox__prev"></button>
@@ -61,24 +61,24 @@
             <h3 class="contact-name"></h3>
           </div>
           <button class="close-btn">
-            <img src="assets/icons/close.svg" class="close-contact" />
+            <img src="assets/icons/close.svg" class="close-contact" alt="close button"/>
           </button>
         </header>
 				<form id="contact-form" onsubmit="return false;" action="#">
 					<div class="formData">
-						<label>Prénom</label>
+						<label for="first">Prénom</label>
 						<input type="text" id="first" class="text-control" name="first"></input>
 					</div>
           <div class="formData">
-						<label>Nom</label>
+						<label for="last">Nom</label>
 						<input type="text" id="last" class="text-control" name="last"></input>
 					</div>
           <div class="formData">
-						<label>Email</label>
+						<label for="email">Email</label>
 						<input type="email" id="email" class="text-control" name="email"></input>
 					</div>
           <div class="formData">
-						<label>Votre message</label>
+						<label for="message">Votre message</label>
 						<input type="textarea" id="message" class="text-control" name="message" maxlength="500"></input>
 					</div>
           <button class="contact_button" id="send">Envoyer</button>
