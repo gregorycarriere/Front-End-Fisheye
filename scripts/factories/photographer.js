@@ -123,12 +123,13 @@ function mediaFactory(data) {
         const btnLike = document.createElement( 'button' );
         btnLike.classList.add('like-button');
         btnLike.setAttribute("isLiked", 'false');
-        
+        btnLike.setAttribute("alt", "like button");
+        btnLike.setAttribute("aria-label", "likes");
 
         const iconLike = document.createElement( 'i' );
         iconLike.classList.add('fa-solid', 'fa-heart', 'like-icon');
         iconLike.setAttribute("id", id);
-        iconLike.setAttribute("alt", "like icon");
+        
 
         btnLike.appendChild(iconLike);
 
@@ -143,6 +144,8 @@ function mediaFactory(data) {
             img.classList.add('media-content');
             img.setAttribute("src", media_picture);
             img.setAttribute("alt", title);
+            img.setAttribute("aria-haspopup","dialog");
+            img.setAttribute("aria-label","closeup view");
             img.setAttribute("tabindex", 0);
 
             mediaLink.appendChild(img);
@@ -152,6 +155,8 @@ function mediaFactory(data) {
             vid.classList.add('media-content');
             vid.setAttribute("src", media_video);
             vid.setAttribute("alt", title);
+            vid.setAttribute("aria-haspopup","dialog");
+            vid.setAttribute("aria-label","closeup view");
             vid.setAttribute("tabindex", 0);
 
             mediaLink.appendChild(vid);
