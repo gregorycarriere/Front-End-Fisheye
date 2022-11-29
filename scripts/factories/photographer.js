@@ -1,4 +1,4 @@
-function photographerFactory(data) {
+export default function photographerFactory(data) {
     const { name, id, portrait, city, country, tagline, price} = data;
 
     const picture = `assets/photographers/${portrait}`;
@@ -96,8 +96,8 @@ function photographerFactory(data) {
 
 
 
-function mediaFactory(data) {
-    const {id,photographerId,title,image,video,likes,date,price} = data;
+export function mediaFactory(data) {
+    const {id,title,image,video,likes} = data;
 
     const media_picture = `assets/images/${image}`;
     const media_video = `assets/images/${video}`;
@@ -145,7 +145,7 @@ function mediaFactory(data) {
             img.setAttribute("src", media_picture);
             img.setAttribute("alt", title);
             img.setAttribute("aria-haspopup","dialog");
-            img.setAttribute("aria-label","closeup view");
+            img.setAttribute("aria-label",title);
             img.setAttribute("tabindex", 0);
 
             mediaLink.appendChild(img);
@@ -156,7 +156,7 @@ function mediaFactory(data) {
             vid.setAttribute("src", media_video);
             vid.setAttribute("alt", title);
             vid.setAttribute("aria-haspopup","dialog");
-            vid.setAttribute("aria-label","closeup view");
+            vid.setAttribute("aria-label",title);
             vid.setAttribute("tabindex", 0);
 
             mediaLink.appendChild(vid);

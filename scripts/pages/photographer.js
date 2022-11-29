@@ -1,4 +1,6 @@
-//Mettre le code JavaScript lié à la page photographer.html
+import photographerFactory from "../factories/photographer.js";
+import { mediaFactory } from "../factories/photographer.js";
+
 
 var params = (new URL(document.location)).searchParams;
 const idPhotographer = params.get('id');
@@ -22,6 +24,8 @@ const zoneLightbox = document.querySelector(".lightbox__container");
 const nextBtnLightbox = document.querySelector(".lightbox__next");
 const prevBtnLightbox = document.querySelector(".lightbox__prev");
 
+const body = document.querySelector("#body");
+const content = document.querySelector(".content");
 
 const getPhotographersData = async() => {
     return await fetch('data/photographers.json')
@@ -35,7 +39,7 @@ async function displayProfile(photographer){
 
     const photographerModel = photographerFactory(photographer);
     photographerModel.getUserProfileDOM();
-};
+}
 
 function triPopularity(medias){
     medias.sort(function (a,b) {
@@ -55,6 +59,7 @@ function triDate(medias){
     });
 }
 
+// Récupère les medias du photographe correspondant à l'ID photographe
 function getProfileMedias(medias){
     medias.forEach((media) => {
         if (media.photographerId == idPhotographer){
@@ -84,7 +89,7 @@ function getNumberLikes(medias){
     allMediasLikes.textContent = numberLikes;
 }
 
-
+// Incrémente/Décrémente le nb de like du média selectionné
 function getLikeClick(Btn){
     const likedMedia = mediaBox.find(media => media.id == Btn.id);
     
@@ -112,6 +117,7 @@ function getLikeClick(Btn){
 
 }
 
+// EventListener des bouttons like
 function checkLikes(){
     const btnLikes = document.querySelectorAll(".like-icon");
     btnLikes.forEach((btnLike) => {
@@ -139,6 +145,7 @@ function checkLikes(){
     });
 }
 
+// Modifie le média affiché dans la lightbox
 function setMediaLightbox(index){
     zoneLightbox.innerHTML = "";
     if(mediaBox[index].image === undefined){
@@ -177,6 +184,7 @@ function prevMedia(){
     setMediaLightbox(currIndex);
 }
 
+// Affiche le média clické dans la lightbox 
 function displayLightbox(link){
     zoneLightbox.innerHTML = "";
     const srcMedia = link.getAttribute("src");
@@ -211,47 +219,38 @@ function displayLightbox(link){
     closeBtnLightbox.focus();
     keyControls();
     
-    function keyControls(){
-        lightbox.addEventListener("keydown", (event) => {
-          if (event.defaultPrevented) {
-            return; // Do nothing if the event was already processed
-          }
-        
-          switch (event.key) {
-            case "Down": // IE/Edge specific value
-            case "ArrowDown":
-              // Do something for "down arrow" key press.
-              break;
-            case "Up": // IE/Edge specific value
-            case "ArrowUp":
-              // Do something for "up arrow" key press.
-              break;
-            case "Left": // IE/Edge specific value
-            case "ArrowLeft":
-              // Do something for "left arrow" key press.
-              prevMedia();
-              break;
-            case "Right": // IE/Edge specific value
-            case "ArrowRight":
-              // Do something for "right arrow" key press.
-              nextMedia();
-              break;
-            case "Enter":
-              // Do something for "enter" or "return" key press.
-              break;
-            case "Esc": // IE/Edge specific value
-            case "Escape":
-              // Do something for "esc" key press.
-              closeLightbox();
-              break;
-            default:
-              return; // Quit when this doesn't handle the key event.
-          }
-        
-          // Cancel the default action to avoid it being handled twice
-          event.preventDefault();
-      });
-    }
+    
+}
+
+function keyControls(){
+    lightbox.addEventListener("keydown", (event) => {
+      if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+      }
+    
+      switch (event.key) {
+        case "Left": // IE/Edge specific value
+        case "ArrowLeft":
+          // Do something for "left arrow" key press.
+          prevMedia();
+          break;
+        case "Right": // IE/Edge specific value
+        case "ArrowRight":
+          // Do something for "right arrow" key press.
+          nextMedia();
+          break;
+        case "Esc": // IE/Edge specific value
+        case "Escape":
+          // Do something for "esc" key press.
+          closeLightbox();
+          break;
+        default:
+          return; // Quit when this doesn't handle the key event.
+      }
+    
+      // Cancel the default action to avoid it being handled twice
+      event.preventDefault();
+  });
 }
 
 function closeLightbox(){
@@ -259,10 +258,9 @@ function closeLightbox(){
     content.setAttribute("aria-hidden", 'false');
     lightbox.setAttribute("aria-hidden", 'true');
     body.classList.remove("no-scroll");
-    // var lastClick = mediaSection.childNodes[currIndex];
-    // lastClick.focus();
 }
 
+// Envoi le média selectionné dans la lightbox
 function getClickMedia() {
     var mediaLink = document.querySelectorAll(".media-content");
     mediaLink.forEach((mediaL) => {
@@ -286,7 +284,7 @@ function getClickMedia() {
 }
 
 
-
+// Initialisation des Event
 function InitListener(mediaBox){
     displayMedias(mediaBox);
     checkLikes();
@@ -294,7 +292,6 @@ function InitListener(mediaBox){
 }
 
 selectTri.addEventListener("change", function(event){
-    console.log(event.target[event.target.selectedIndex].text );
     switch(event.target[event.target.selectedIndex].text){
         case "Date":
             triDate(mediaBox);
@@ -311,12 +308,10 @@ selectTri.addEventListener("change", function(event){
     }
 })
 
-
 closeBtnLightbox.addEventListener("click", function(){
     closeLightbox();
     InitListener(mediaBox);
-});
-
+})
 
 nextBtnLightbox.addEventListener("click", nextMedia);
 
@@ -348,6 +343,6 @@ async function init() {
 
     displayProfile(profileData);
     
-};
+}
 
 init();

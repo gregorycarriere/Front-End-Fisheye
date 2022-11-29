@@ -1,6 +1,4 @@
-#contact_modal {
-    display: none;
-}
+/* Header */
 
 .photograph-header {
     background-color: #FAFAFA;
@@ -39,6 +37,8 @@
     object-fit: cover;
 }
 
+/* Tri Section */
+
 .media-tri{
     font-size: 1.1em;
     font-weight: bold;
@@ -57,6 +57,8 @@ select{
     font-size: 1em;
     color: white;
 }
+
+/* Media Section */
 
 .media_section{
     display: flex;
@@ -137,6 +139,7 @@ select{
     transform: scale(1.3);
 }
 
+/* Aside Section */
 
 .info-sup{
     position: fixed;
@@ -163,7 +166,10 @@ select{
     margin-right: 3px;
 }
 
+/* Contact modal */
+
 #contact_modal{
+    display: none;
     position: fixed;
     z-index: 5;
     left: 0;
@@ -196,7 +202,6 @@ select{
     overflow: hidden;
  }
  
-
 .modal {
     border-radius: 5px;
     background-color: #DB8876;

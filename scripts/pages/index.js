@@ -1,4 +1,6 @@
+import  photographerFactory from "../factories/photographer.js"
 
+// Récupère toutes les données des photographes du fichier JSON
 const getPhotographers = async() => {
     return await fetch('data/photographers.json')
     .then(function(result) { return result.json() })
@@ -6,6 +8,7 @@ const getPhotographers = async() => {
     .catch(function(error){ console.log('une erreur fetch' + error)})
 }
 
+// Affiche les données des photographes
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     photographers.forEach((photographer) => {
@@ -13,13 +16,12 @@ async function displayData(photographers) {
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     });
-};
+}
 
 async function init() {
-    // Récupère les datas des photographes
     const photographers = await getPhotographers();
     displayData(photographers);
-};
+}
     
 init();
     
